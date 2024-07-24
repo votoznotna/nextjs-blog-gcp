@@ -1,9 +1,10 @@
 import { initDatabase } from '@/db/init'
 import { listAllPosts } from '@/data/posts'
-import { PostList } from '@/components/PostList'
 
-export default async function HomePage() {
+export async function GET() {
   await initDatabase()
   const posts = await listAllPosts()
-  return <PostList posts={posts} />
+  return Response.json({ posts, currentTime: Date.now() })
 }
+
+export const dynamic = 'force-dynamic'
